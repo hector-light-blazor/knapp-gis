@@ -1,3 +1,9 @@
-<h1>
-  {{title}}
-</h1>
+
+<knapp-header (showComponents)="showComponent($event)"></knapp-header>
+<knapp-legend (heatMapOptions)="controlMap($event)" (closeTbl)="closeLegend($event)" *ngIf="!showCharts && showLegend"></knapp-legend>
+
+<knapp-chart-graphs *ngIf="showCharts" (cntDisplay)="showChartsOrHide($event)" ></knapp-chart-graphs>
+<knapp-esri-map [options]="options" [changeMapSize]="mapSize"></knapp-esri-map>  
+<knapp-data-table [appdissappear]="showtable" (controlMap)="controlMap($event)" (updatetable)="updateTable($event)">
+</knapp-data-table>
+

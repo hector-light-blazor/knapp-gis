@@ -1,0 +1,133 @@
+<knapp-description *ngIf="showDes" [title]="titleDes" [description]="bodyDes" (clDesc)="showDes = false;"></knapp-description>
+<div class="mainContainerTable" *ngIf="appdissappear">
+  <div class="header">
+    <span style="float:right; margin-right:4px;" (click)="closeTable()"><img src="assets/knapp_close_icon.png" alt="icon close" width="20" height="20"></span>
+    <h3 style="text-align: center">Investment Analysis Data</h3>
+  </div>
+  <div class="body">
+      <div >
+        	 <!-- <div class="panel panel-info">  -->
+            <div>
+            <!-- <div class="panel-heading"><h2 >Impact</h2></div> -->
+            <div >
+            <table class="table table-condensed" style="border-collapse:collapse;">
+              <thead>
+                <tr><th>&nbsp;</th>
+                    <th>Areas of Interests</th>
+                    <th>Funded</th>
+                    <th>Map It</th>
+                    <th>Description</th>
+                </tr>
+              </thead>
+            <tbody>
+               <!-- <div *ngFor="let data of tableSummary; let i = index"> -->
+
+                 <template let-group  ngFor [ngForOf]="tableSummary">
+                     <tr   class="accordion-toggle">
+                       <td>
+                        <button data-toggle="collapse" [attr.data-target]="'#' + group.program_id" class="btn btn-warning btn-xs">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                        </td>
+                        <td>{{group.program_name}}</td>
+                        <td>{{group.total}}</td>
+                        <td><button (click)="displayMap(group)" [ngClass]="{'btn-white': !group.selection, 'btn-error': group.selection}" class="btn  btn-xs"><span class="glyphicon glyphicon-map-marker"></span></button></td>
+                        <td>
+                          <button (click)="showDescription(group)" class="btn btn-info btn-xs">
+                          <span class="glyphicon glyphicon-info-sign"></span>
+                          </button>
+                        </td>
+                     </tr>
+                      <tr *ngIf="group.grants_list.length > 0">
+                        <td colspan="12" class="hiddenRow">
+                          <knapp-table-card (notifytable)="controlmap($event)" [grantees]="group.grants_list" [id]="group.program_id"></knapp-table-card>
+                        </td>
+                      </tr>
+                     
+                 </template>
+                 <!-- <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle"> 
+                    <td>
+                    <button class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    </button>
+                    </td>
+                    <td>{{data.program_name}}</td>
+                    <td>{{data.total}}</td>
+                    <td><button>Click!</button></td>
+                   
+                 </tr> -->
+                  <!-- <tr>
+                    <td colspan="12" class="hiddenRow">
+                        <div class="accordian-body collapse" id="demo1"> 
+                              <table class="table table-striped">
+                              <thead>
+                                <tr><th>Grantee</th></tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let subItem of data.grants_list">
+                                  <td>
+                                    {{subItem.grantees}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                              </table>
+                        </div>
+                    </td>
+                </tr> -->
+              <!-- </div>  -->
+        <!-- <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+            <td>
+            <button class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            </button>
+            </td>
+            <td>Areas of Interests</td>
+            <td>Funded</td>
+            <td>hpcloud</td>
+            <td>nova</td>
+            
+        </tr>  -->
+          <!-- <tr>
+            <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo1"> 
+              <table class="table table-striped">
+                      <thead>
+                        <tr><th>Access Key</th><th>Secret Key</th><th>Status </th><th> Created</th><th> Expires</th><th>Actions</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>access-key-1</td><td>secretKey-1</td><td>Status</td><td>some date</td><td>some date</td><td><a href="#" class="btn btn-default btn-sm">
+                  <i class="glyphicon glyphicon-cog"></i></a></td></tr>
+                      </tbody>
+               	</table>
+              
+              </div> </td>
+        </tr> -->
+        
+        <!-- <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+                <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                <td>OBS Name</td>
+                <td>OBS Description</td>
+                <td>hpcloud</td>
+                <td>nova</td>
+        </tr>
+        <tr>
+            <td colspan="6" class="hiddenRow">
+              <div id="demo2" class="accordian-body collapse">Demo2</div>
+            </td>
+        </tr>
+        <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+            <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+            <td>OBS Name</td>
+            <td>OBS Description</td>
+            <td>hpcloud</td>
+            <td>nova</td>
+        </tr>
+        <tr>
+            <td colspan="6" class="hiddenRow"><div id="demo3" class="accordian-body collapse">Demo3</div></td>
+        </tr> -->
+        </tbody>
+        </table>
+        </div>
+        </div>  
+        </div>
+  </div>
+</div>

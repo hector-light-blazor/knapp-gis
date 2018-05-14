@@ -1,0 +1,22 @@
+.navbar-default{
+    background: #0E4488;
+   
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+   
+    background-color: #0E4488;
+}
+
+li {
+   float: left;
+   padding: 10px 20px;
+   
+}
+
+li:hover{
+    cursor: pointer;
+    background: #0B1D35;
+}

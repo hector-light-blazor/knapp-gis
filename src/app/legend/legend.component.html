@@ -1,0 +1,90 @@
+<div class="page">
+  <div class="header">
+    <span style="float:right;" (click)="closeTable()"><img src="assets/knapp_close_icon.png" alt="icon close" width="20" height="20"></span>
+  </div>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a data-toggle="tab" href="#legend">LEGEND COLORS</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#layers">HEAT MAP</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="legend" class="tab-pane fade in active">
+        
+        <table>
+           <tr>
+             <td>
+                <div style="background:#FFFF33;width:20px; height:20px;">
+                </div>
+             </td>
+              <td>
+                BEHAVIORAL HEALTH
+              </td>
+           </tr>
+            <tr>
+             <td>
+                <div style="background:#000080;width:20px; height:20px;">
+                </div>
+             </td>
+              <td>
+                DIRECT HEALTH
+              </td>
+           </tr>
+            <tr>
+             <td>
+                <div style="background:#8B0000;width:20px; height:20px;">
+                </div>
+             </td>
+              <td>
+                HEALTH EDUCATION
+              </td>
+           </tr>
+            <tr>
+             <td>
+                <div style="background:#FA8072;width:20px; height:20px;">
+                </div>
+             </td>
+              <td>
+                NUTRITION
+              </td>
+           </tr>
+            <tr>
+             <td>
+                <div style="background:#0E7C2C;width:20px; height:20px;">
+                </div>
+             </td>
+              <td>
+                PREVENTION
+              </td>
+           </tr>
+            <tr>
+             <td>
+                <div style="background:#0B97EC;width:20px; height:20px;">
+                </div>
+             </td>
+              <td>
+                WELLNESS
+              </td>
+           </tr>
+        </table>
+        
+      </div>
+      <div id="layers" class="tab-pane fade">
+        <form action="">
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="ALL"> ALL <br>
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="BH"> BEHAVIORAL HEALTH<br>
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="DH"> DIRECT HEALTH<br>
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="HE"> HEALTH EDUCATION <br>
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="N"> NUTRITION <br>
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="P"> PREVENTION <br>
+            <input type="radio" (change)="handleChange($event)" [(ngModel)]="bucket" name="BUCKETS" value="W"> WELLNESS <br>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

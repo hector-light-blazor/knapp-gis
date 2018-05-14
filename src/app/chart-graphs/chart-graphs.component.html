@@ -1,0 +1,34 @@
+<div class="mainContainerTable" >
+  <div class="header">
+      <span style="float:right; margin-right:4px;cursor:pointer;" (click)="closeCharts()"><img src="assets/knapp_close_icon.png" alt="icon close" width="20" height="20"></span>
+       <h3 style="text-align: center">{{nameReport}}</h3>  
+    <div class="dropdown">
+      
+      
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Change Report
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li (click)="changeReport('y')"><a >Yearly Report</a></li>
+        <li (click)="changeReport('p')"><a >AOI Report</a></li>
+        <li (click)="changeReport('r')"><a >Region Report</a></li>
+      </ul>
+      
+    </div>
+    
+  </div>
+  <br>
+  <br>
+  <div   class="container">
+    <canvas  baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [colors]="barChartColors"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            ></canvas>
+  </div>
+  </div>
+<!-- (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)" -->

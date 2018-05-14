@@ -1,0 +1,25 @@
+
+       <div class="accordian-body collapse" [attr.id]="id" > 
+          <table class="table table-striped" style="color: #011E44">
+              <thead>
+              <tr>
+                <th>Grantee</th>
+                <th>Amount</th>
+                <th>Map It</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of grantees">
+                <td>
+                   {{row.grantees}}
+                </td>
+                <td>
+                   {{row.total}}
+                </td>
+                  <td>
+                    <button (click)="onClickGrantee(row)" [ngClass]="{'btn-success': !row.selection, 'btn-error': row.selection}" class="btn btn-xs"><span class="glyphicon glyphicon-map-marker"></span></button>
+                  </td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
