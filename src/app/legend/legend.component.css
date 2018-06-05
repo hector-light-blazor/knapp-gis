@@ -1,0 +1,24 @@
+.page{
+    border-radius: 6px;
+    background: rgba(19, 112, 231, 0.8);
+    width: 300px;
+    overflow: hidden;
+    height: 400px;
+}
+.header{
+    background: #0D5DC4;
+    height: 30px;
+}
+.min{
+    color: rgba(1, 167, 57, 0.4);
+    background: rgba(1, 167, 57, 0.4);
+
+}
+
+
+td:nth-child(1){
+    padding-right: 10px;
+}
+tr > td{
+    padding:4px;
+}
