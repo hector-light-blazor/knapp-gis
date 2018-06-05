@@ -148,6 +148,18 @@ export class EsriMapComponent implements OnInit {
             basemap: "osm"
           });
 
+          // To Check if we are in iframe..
+          let loc = window.location['ancestorOrigins'];
+
+          if(loc[0] == "https://www.communitycare.today") {
+            console.log("CARE FOUNDATION CALL ME ESRI MAP");
+              //If in iframe disable mouse navigation...
+            this.map.disableScrollWheelZoom();
+            this.map.disableScrollWheel();
+          }
+        
+
+
           //GET GEOMETRY ENGINE OBJECT.....
           this.geomEngine = geometryEngineAsync;
 
