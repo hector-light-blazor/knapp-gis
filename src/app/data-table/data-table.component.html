@@ -31,7 +31,10 @@
                         </td>
                         <td class="text-shadow">{{group.program_name}}</td>
                         <td class="text-shadow">{{group.total}}</td>
-                        <td><button (click)="displayMap(group)" [ngClass]="{'btn-white': !group.selection, 'btn-error': group.selection}" class="btn  btn-xs"><span class="glyphicon glyphicon-map-marker"></span></button></td>
+                        <td><button (click)="displayMap(group)" 
+                          [ngClass]="{'btn-white': !group.selection, 'btn-error': group.selection}" 
+                          class="btn  btn-xs"><span class="glyphicon glyphicon-map-marker"></span>
+                        </button></td>
                         <td>
                           <button (click)="showDescription(group)" class="btn btn-info btn-xs">
                           <span class="glyphicon glyphicon-info-sign"></span>

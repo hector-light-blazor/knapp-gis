@@ -49,6 +49,7 @@ export class DataTableComponent implements OnInit {
   closeTable(){
 
     //DESELECT ANYTHING FROM TABLE..
+    
     if(this.selected) this.selected.selection = false;
 
     if(this.subSelected) this.subSelected.selection = false;
@@ -83,6 +84,10 @@ export class DataTableComponent implements OnInit {
 
     if(this.selected){
       this.selected.selection = false;
+    }
+
+    if(this.subSelected) {
+      this.subSelected.selection = false;
     }
 
     this.selected = null;

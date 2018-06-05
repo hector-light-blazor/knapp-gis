@@ -23,9 +23,11 @@ export class TableCardComponent implements OnInit {
   }
 
   onClickGrantee(row){
+    console.log(this.selected);
     if(this.selected){
       this.selected.selection = false;
     }
+
 
     row.selection = true;
     this.selected = row;
