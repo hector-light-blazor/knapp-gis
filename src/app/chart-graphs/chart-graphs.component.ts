@@ -69,7 +69,7 @@ export class ChartGraphsComponent implements OnInit {
      this._apiService.GET_METHOD("grants/getListYears").subscribe(response =>{
         
         this.barChartLabels = response;
-        this.barChartColors = [];
+        this.barChartColors = [{backgroundColor: '#00aa01'}];
      });
   }
 
@@ -112,7 +112,8 @@ export class ChartGraphsComponent implements OnInit {
         
         let names = response.name;
          this.barChartData = [];
-         this.barChartColors = [];
+        
+          this.barChartColors = [{backgroundColor: '#0064b4'}];
          let _self = this;
         setTimeout(function() {
            _self.barChartLabels = null;
@@ -139,6 +140,7 @@ export class ChartGraphsComponent implements OnInit {
         }, 10);
 
         this.barChartColors = [{backgroundColor: response.colors}];
+        console.log(response.colors);
         this.barChartData = [{data: response.money, label: "Programs Impact"}];
         
     });

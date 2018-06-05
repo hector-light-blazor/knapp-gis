@@ -15,6 +15,10 @@
 
 }
 
+.nav-tabs a {
+    color: black;
+}
+
 
 td:nth-child(1){
     padding-right: 10px;

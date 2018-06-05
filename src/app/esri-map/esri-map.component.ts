@@ -141,7 +141,7 @@ export class EsriMapComponent implements OnInit {
         
        //Setup map...
           this.map = new Map(this.mapObj.nativeElement, {
-            zoom: 8,
+            zoom: 10,
             center: [-97.990522, 26.158336],
             slider: false,
             showAttribution: false,
