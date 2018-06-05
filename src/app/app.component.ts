@@ -13,18 +13,7 @@ export class AppComponent {
   mapSize:string = "100%";
 
   constructor() {
-    let loc = window.location['ancestorOrigins'];
-    console.log(loc[0]);
-
-    window.onload = () => {
-      
-      if(loc[0] == "https://www.communitycare.today") {
-        console.log("CARE FOUNDATION CALL ME");
-        //window.scrollBy(0, 300);
-        window.scrollTo(0, 350);
-      }
-      
-    }
+  
     
   }
 

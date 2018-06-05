@@ -148,15 +148,16 @@ export class EsriMapComponent implements OnInit {
             basemap: "osm"
           });
 
-          // To Check if we are in iframe..
-          let loc = window.location['ancestorOrigins'];
-
-          if(loc[0] == "https://www.communitycare.today") {
-            console.log("CARE FOUNDATION CALL ME ESRI MAP");
-              //If in iframe disable mouse navigation...
-            this.map.disableScrollWheelZoom();
-            this.map.disableScrollWheel();
+          // To Check if we are in iframe
+          if(this.inIframe()) {
+            
+              console.log("CARE FOUNDATION CALL ME ESRI MAP");
+                //If in iframe disable mouse navigation...
+              this.map.disableScrollWheelZoom();
+              this.map.disableScrollWheel();
+            
           }
+         
         
 
 
@@ -204,6 +205,15 @@ export class EsriMapComponent implements OnInit {
          
      });
 
+    }
+  }
+
+
+ inIframe () {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
     }
   }
 
