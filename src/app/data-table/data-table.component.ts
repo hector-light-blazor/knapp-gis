@@ -33,7 +33,7 @@ export class DataTableComponent implements OnInit {
 
   getSummaryReport(){
       this._apiService.GET_METHOD("programs/getSummaryReport/").subscribe(response => {
-        //console.log(response);
+        
         var length = response.length;
         for(var i = 0; i < length; i++){
            response[i].selection = JSON.parse(response[i].selection);
@@ -75,11 +75,11 @@ export class DataTableComponent implements OnInit {
       this.subSelected.selection = false;
       this.subSelected = null;
     }
-
+    
     object.selection = true;
     this.selected = object;
     
-    let options = {"option" : "dataTable", "program" : object.program_id};
+    let options = {"option" : "dataTable", "program" : object.program_id, "total" : object.total};
     this.controlMap.emit(options);
   }
 

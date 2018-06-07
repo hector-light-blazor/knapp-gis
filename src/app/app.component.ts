@@ -59,8 +59,7 @@ export class AppComponent {
   //Control Map Through Options..
   controlMap(e:any):void{
 
-    console.log(e);
-
+   
     this.options = e;
   }
   closeLegend(event):void{

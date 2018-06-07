@@ -45,16 +45,18 @@ export class EsriMapComponent implements OnInit {
   ngOnChanges() {
     
     if(this.options){
-      console.log(this.options);
+    
        switch (this.options.option) {
          case "dataTable":
            this.programFeatureLayer.hide();
-           this.getSingleProgramLayer(this.options.program);
+           
+           this.getSingleProgramLayer(this.options.program,this.findName(this.options.program), this.options.total);
            break;
          case "subTable":
-            console.log(this.options);
+            
             this.programFeatureLayer.hide();
-            this.getSingleGranteeLayer(this.options.grant.grant_id, this.options.grant.color, this.options.grant.program);
+            this.getSingleGranteeLayer(this.options.grant.grant_id, this.options.grant.color, this.options.grant.program, this.options.grant.total);
+            
             //this.labelText(this.options.grant.program);
             break;
          case "defaultMap":
@@ -62,7 +64,7 @@ export class EsriMapComponent implements OnInit {
             this.programsLayer.clear();
             break;
          case "heatMap":
-           console.log("I HERE YOU");
+          
            this.makeDecision();
            break;
          default:
@@ -70,6 +72,38 @@ export class EsriMapComponent implements OnInit {
        }
     }
   }
+
+  findName(name) {
+    let response;
+
+    switch (name) {
+      case "BH":
+        response = "BEHAVIORAL HEALTH"
+        break;
+      case "DH":
+        response = "DIRECT HEALTH"
+        break;
+      case "HE":
+        response = "HEALTH EDUCATION"
+        break;
+      case "N":
+        response = "NUTRITION"
+        break;
+      case "P":
+        response = "PREVENTION"
+        break;
+      case "W":
+        response = "WELLNESS"
+        break;
+      default:
+        response = "NONE";
+        break;
+    }
+
+    return response;
+
+  }
+
   makeDecision(): void{
        this.programsLayer.clear();
        this.programFeatureLayer.clear();
@@ -85,9 +119,9 @@ export class EsriMapComponent implements OnInit {
 
   // This Controls to add Label Text...
 
-  labelText(value) {
-    console.log(value);
-  }
+  // labelText(value) {
+  //   console.log(value);
+  // }
 
   //Lets render Heat from the bucket selected....
   renderHeat():void{
@@ -161,7 +195,7 @@ export class EsriMapComponent implements OnInit {
           // To Check if we are in iframe
           if(this.inIframe()) {
             
-              console.log("CARE FOUNDATION CALL ME ESRI MAP");
+             // console.log("CARE FOUNDATION CALL ME ESRI MAP");
                 //If in iframe disable mouse navigation...
               this.map.disableScrollWheelZoom();
               this.map.disableScrollWheel();
@@ -277,7 +311,7 @@ export class EsriMapComponent implements OnInit {
 
   getProgramLocations():void{
     this._apiService.GET_METHOD("programs/getLocationGrants/").subscribe((response:any) => {
-       console.log(response);
+       //console.log(response);
 
       //Loop through the response information..
       let length = response.length;
@@ -296,11 +330,12 @@ export class EsriMapComponent implements OnInit {
     })
   }
 
-  getSingleProgramLayer(id):void{
+  getSingleProgramLayer(id, program, total):void{
     this.programsLayer.clear();
+    this.textLayer.clear();
     let arrGeom = [];
     this._apiService.GET_METHOD("programs/getSingleProgramLocation/?id=" + id).subscribe(response => {
-        //console.log(response);
+       // console.log(response);
         let length = response.length;
         for(var i = 0; i < length; i++){
             let color = response[i].color;
@@ -328,6 +363,19 @@ export class EsriMapComponent implements OnInit {
 
       this.geomEngine.union(arrGeom).then(response => {
           this.map.setExtent(response.getExtent());
+
+          // console.log("HELLO");
+
+          let center = response.getExtent().getCenter();
+          let graphic = new this.graphics(center, new this.esriTextSymbol(program));
+          let grph = new this.graphics(center.offset(0, -.0096), new this.esriTextSymbol(total))
+          //console.log(graphic);
+
+          graphic.symbol.font.size = 22;
+          grph.symbol.font.size = 22;
+          
+          this.textLayer.add(graphic);
+          this.textLayer.add(grph);
       });
       
 
@@ -336,7 +384,7 @@ export class EsriMapComponent implements OnInit {
 
   }
 
-  getSingleGranteeLayer(id, color, program):void{
+  getSingleGranteeLayer(id, color, program, total):void{
     this.programsLayer.clear();
     this.textLayer.clear();
     let arrGeom = [];
@@ -369,12 +417,14 @@ export class EsriMapComponent implements OnInit {
           this.map.setExtent(response.getExtent());
           let center = response.getExtent().getCenter();
           let graphic = new this.graphics(center, new this.esriTextSymbol(program));
-          console.log(graphic);
-
-          graphic.symbol.font.size = 20;
-
+          let grph = new this.graphics(center.offset(0, -.0096), new this.esriTextSymbol(total))
+        
+          graphic.symbol.font.size = 22;
+          grph.symbol.font.size = 22;
+          
           this.textLayer.add(graphic);
-          //console.log(response.getEx)
+          this.textLayer.add(grph);
+          
 
       });
 
