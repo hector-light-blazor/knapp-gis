@@ -11,6 +11,8 @@ export class DataTableComponent implements OnInit {
   @Input() appdissappear:boolean;
   @Output() updatetable = new EventEmitter<boolean>();
   @Output() controlMap = new EventEmitter<any>();
+  @Output() showComponents = new EventEmitter<any>();
+
   tableSummary:any;
 
   selected:any = null;
@@ -20,6 +22,7 @@ export class DataTableComponent implements OnInit {
   showDes:boolean = false;
   titleDes:string = "";
   bodyDes:string = "";
+  displayBtn: boolean = false;
 
   constructor(private _apiService: ApiService) { }
 
@@ -95,6 +98,12 @@ export class DataTableComponent implements OnInit {
     this.subSelected = e;
     let options = {"option" : "subTable", "grant" : e};
     this.controlMap.emit(options);
+  }
+
+
+  changeSize(value) {
+    let  options = {"command" : value};
+    this.showComponents.emit(options);
   }
 
   showDescription(program):void{

@@ -3,5 +3,5 @@
 
 <knapp-chart-graphs *ngIf="showCharts" (cntDisplay)="showChartsOrHide($event); mapSizeFull()" ></knapp-chart-graphs>
 <knapp-esri-map [options]="options" [changeMapSize]="mapSize"></knapp-esri-map>  
-<knapp-data-table [appdissappear]="showtable" (controlMap)="controlMap($event)" (updatetable)="updateTable($event)">
+<knapp-data-table [appdissappear]="showtable" (showComponents)="showComponent($event)" (controlMap)="controlMap($event)" (updatetable)="updateTable($event)">
 </knapp-data-table>

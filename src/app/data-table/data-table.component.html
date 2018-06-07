@@ -1,7 +1,20 @@
 <knapp-description *ngIf="showDes" [title]="titleDes" [description]="bodyDes" (clDesc)="showDes = false;"></knapp-description>
+<div (click)="displayBtn=false; appdissappear=true;changeSize('SHRINK_SIZE')" [ngClass]="{'notDisplayBtn' : !displayBtn, 'displayBtn': displayBtn}" style="position: absolute;left: 50%;cursor: pointer;text-align: center;color: #0D5DC4; border-top-left-radius: 4px; border-top-right-radius: 4px;background: black; margin-left: -10px;margin:auto;bottom: 0; width: 20px; height: 20px;">
+    <i class="fa fa-caret-up" aria-hidden="true"></i>
+</div>
+
 <div class="mainContainerTable" *ngIf="appdissappear">
   <div class="header">
-    <span style="float:right; margin-right:4px;" (click)="closeTable()"><img src="assets/knapp_close_icon.png" alt="icon close" width="20" height="20"></span>
+
+    <div style="float: right">
+        <span (click)="displayBtn = !displayBtn; appdissappear = false;changeSize('FULL_SIZE')" style="margin-right: 4px;cursor:pointer; color: black;font-size: 22px;">
+            <i class="fa fa-minus-square" aria-hidden="true"></i>
+      
+          </span>
+        <span style="position: relative;bottom: 4px;margin-right:4px;cursor: pointer;" (click)="closeTable()">
+          <img src="assets/knapp_close_icon.png" alt="icon close" width="20" height="20"></span>
+    </div>
+    
     <h3 class="text-shadow" style="text-align: center">Investment Analysis Data</h3>
   </div>
   <div class="body">
@@ -43,7 +56,7 @@
                      </tr>
                       <tr *ngIf="group.grants_list.length > 0">
                         <td colspan="12" class="hiddenRow">
-                          <knapp-table-card (notifytable)="controlmap($event)" [grantees]="group.grants_list" [id]="group.program_id"></knapp-table-card>
+                          <knapp-table-card (notifytable)="controlmap($event)" [name]="group.program_name" [grantees]="group.grants_list" [id]="group.program_id"></knapp-table-card>
                         </td>
                       </tr>
                      

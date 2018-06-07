@@ -14,8 +14,10 @@ export class EsriMapComponent implements OnInit {
   @Input() changeMapSize:string="100%";
   map:any = null;
   programsLayer:any=null;
+  textLayer: any = null;
   programFeatureLayer:any = null;
   graphics:any=null;
+  esriTextSymbol: any = null;
   point:any=null;
   polygon:any=null;
   simpleSymbol:any=null;
@@ -50,8 +52,10 @@ export class EsriMapComponent implements OnInit {
            this.getSingleProgramLayer(this.options.program);
            break;
          case "subTable":
+            console.log(this.options);
             this.programFeatureLayer.hide();
-            this.getSingleGranteeLayer(this.options.grant.grant_id, this.options.grant.color);
+            this.getSingleGranteeLayer(this.options.grant.grant_id, this.options.grant.color, this.options.grant.program);
+            //this.labelText(this.options.grant.program);
             break;
          case "defaultMap":
             this.programFeatureLayer.show();
@@ -77,6 +81,12 @@ export class EsriMapComponent implements OnInit {
        }else {
           this.renderHeat();
        }
+  }
+
+  // This Controls to add Label Text...
+
+  labelText(value) {
+    console.log(value);
   }
 
   //Lets render Heat from the bucket selected....
@@ -130,12 +140,12 @@ export class EsriMapComponent implements OnInit {
   createMap():void{
     if(!this.map){
 
-     esriLoader.dojoRequire(['esri/map',"esri/graphic","esri/InfoTemplate", 
+     esriLoader.dojoRequire(['esri/map',"esri/graphic","esri/InfoTemplate", "esri/symbols/TextSymbol",
      "esri/geometry/Point", "esri/geometry/Polygon", "esri/geometry/geometryEngineAsync",
      "esri/layers/GraphicsLayer", "esri/layers/FeatureLayer", "esri/symbols/SimpleFillSymbol", 
      "esri/symbols/SimpleLineSymbol", "esri/Color","esri/symbols/SimpleMarkerSymbol", 
      "esri/renderers/ClassBreaksRenderer", "esri/renderers/HeatmapRenderer",], 
-     (Map, Graphic,InfoTemplate,  Point, Polygon, geometryEngineAsync, 
+     (Map, Graphic,InfoTemplate, TextSymbol, Point, Polygon, geometryEngineAsync, 
       GraphicsLayer, FeatureLayer, SimpleFillSymbol, SimpleLineSymbol, Color,
       SimpleMarkerSymbol, ClassBreaksRenderer, HeatmapRenderer) => {
         
@@ -160,6 +170,8 @@ export class EsriMapComponent implements OnInit {
          
         
 
+          // GET TEXT SYMBOL OBJECT ....
+          this.esriTextSymbol = TextSymbol;
 
           //GET GEOMETRY ENGINE OBJECT.....
           this.geomEngine = geometryEngineAsync;
@@ -191,6 +203,10 @@ export class EsriMapComponent implements OnInit {
 
           //Create new Graphics Layer name Programs Layer....
           this.programsLayer = new GraphicsLayer();
+
+
+          //Holds all the Text Layer Information...
+          this.textLayer = new GraphicsLayer();
 
           //Create new Feature Layer name Feature Programs Layer...
 
@@ -255,6 +271,7 @@ export class EsriMapComponent implements OnInit {
 
         this.map.addLayer(this.programFeatureLayer);
         this.map.addLayer(this.programsLayer);
+        this.map.addLayer(this.textLayer);
 
   }
 
@@ -319,8 +336,9 @@ export class EsriMapComponent implements OnInit {
 
   }
 
-  getSingleGranteeLayer(id, color):void{
+  getSingleGranteeLayer(id, color, program):void{
     this.programsLayer.clear();
+    this.textLayer.clear();
     let arrGeom = [];
     this._apiService.GET_METHOD("grants/getSingleLocation/?id=" + id).subscribe(response => {
 
@@ -346,8 +364,18 @@ export class EsriMapComponent implements OnInit {
       }
 
        //LETS UNION ALL GEOMETRIES AND ZOOM TO EXTENT....
+
       this.geomEngine.union(arrGeom).then(response => {
           this.map.setExtent(response.getExtent());
+          let center = response.getExtent().getCenter();
+          let graphic = new this.graphics(center, new this.esriTextSymbol(program));
+          console.log(graphic);
+
+          graphic.symbol.font.size = 20;
+
+          this.textLayer.add(graphic);
+          //console.log(response.getEx)
+
       });
 
     });

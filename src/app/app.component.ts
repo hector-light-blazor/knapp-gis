@@ -34,7 +34,12 @@ export class AppComponent {
       case "CHARTS":
         this.showCharts = (this.showCharts) ? false : true;
         this.showtable = (this.showtable) ? false : false;
-        break;                                         
+        break;  
+      case "FULL_SIZE":
+         this.mapSize = "100%";
+         break;
+      case "SHRINK_SIZE":
+         this.mapSize = "66%";
       default:          
         break;
     }
@@ -53,6 +58,9 @@ export class AppComponent {
 
   //Control Map Through Options..
   controlMap(e:any):void{
+
+    console.log(e);
+
     this.options = e;
   }
   closeLegend(event):void{

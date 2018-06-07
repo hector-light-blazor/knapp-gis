@@ -9,6 +9,7 @@ export class TableCardComponent implements OnInit {
 
   @Input() grantees:any;
   @Input() id:any;
+  @Input() name: string;
   @Output() notifytable = new EventEmitter<any>();
   size:number=0;
   selected:any=null;
@@ -23,12 +24,12 @@ export class TableCardComponent implements OnInit {
   }
 
   onClickGrantee(row){
-    console.log(this.selected);
+    
     if(this.selected){
       this.selected.selection = false;
     }
 
-
+    row.program = this.name;
     row.selection = true;
     this.selected = row;
     

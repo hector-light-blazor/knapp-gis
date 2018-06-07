@@ -33,7 +33,20 @@ img:hover{
     color:#0D5DC4;
 }
 
+.btn-error {
+    background: black;
+    color: white;
+}
+
 table{
     overflow-y:  scroll;
 }
 
+.displayBtn {
+    display: block;
+
+}
+
+.notDisplayBtn {
+    display: none;
+}
