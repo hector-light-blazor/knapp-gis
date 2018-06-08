@@ -6,12 +6,15 @@
       
       
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        Change Report
+        Click to change graph type
       <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li (click)="changeReport('y')"><a >Yearly Report</a></li>
-        <li (click)="changeReport('p')"><a >AOI Report</a></li>
-        <li (click)="changeReport('r')"><a >Region Report</a></li>
+        <li (click)="changeChartType('line')"><a >Line Chart</a></li>
+        <li (click)="changeChartType('bar')"><a >Bar Chart</a></li>
+        <li (click)="changeChartType('radar')"><a >Radar Chart</a></li>
+        <li (click)="changeChartType('pie')"><a >Pie Chart</a></li>
+        <!-- <li (click)="changeChartType('polarArea')"><a >Polar Area Chart</a></li> -->
+        
       </ul>
       
     </div>
@@ -20,7 +23,25 @@
   <br>
   <br>
   <div   class="container">
-    <canvas  baseChart
+
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li (click)="changeReport('y')" class="nav-item active">
+            <a class="nav-link active" id="yearly-tab" data-toggle="tab" href="#yearly" role="tab" aria-controls="yearly" aria-selected="true">
+              Yearly Report</a>
+          </li>
+          <li (click)="changeReport('p')" class="nav-item">
+            <a class="nav-link" id="aoi-tab" data-toggle="tab" href="#aoi" role="tab" aria-controls="aoi" aria-selected="false">
+              AOI Report</a>
+          </li>
+          <li (click)="changeReport('r')" class="nav-item">
+            <a class="nav-link" id="region-tab" data-toggle="tab" href="#region" role="tab" aria-controls="region" aria-selected="false">
+              Region Report</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade in active" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
+            <br> 
+            <canvas  baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [colors]="barChartColors"
@@ -28,6 +49,43 @@
             [legend]="barChartLegend"
             [chartType]="barChartType"
             ></canvas>
+          </div>
+          <div class="tab-pane fade" id="aoi" role="tabpanel" aria-labelledby="aoi-tab">
+            <br>
+              <canvas  baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [colors]="barChartColors"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              ></canvas>
+          </div>
+          <div class="tab-pane fade" id="region" role="tabpanel" aria-labelledby="region-tab">
+            <br>
+              <canvas  baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [colors]="barChartColors"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              ></canvas>
+          </div>
+        </div>
+
+
+
+
+
+    <!-- <canvas  baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [colors]="barChartColors"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            ></canvas> -->
   </div>
   </div>
 <!-- (chartHover)="chartHovered($event)"
