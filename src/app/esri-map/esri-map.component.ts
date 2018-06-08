@@ -45,7 +45,7 @@ export class EsriMapComponent implements OnInit {
   ngOnChanges() {
     
     if(this.options){
-    
+      console.log(this.options);
        switch (this.options.option) {
          case "dataTable":
            this.programFeatureLayer.hide();
@@ -62,6 +62,7 @@ export class EsriMapComponent implements OnInit {
          case "defaultMap":
             this.programFeatureLayer.show();
             this.programsLayer.clear();
+            this.textLayer.clear();
             break;
          case "heatMap":
           
