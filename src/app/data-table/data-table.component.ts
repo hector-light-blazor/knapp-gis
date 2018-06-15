@@ -65,6 +65,16 @@ export class DataTableComponent implements OnInit {
     
   }
 
+
+  onDownload() {
+    var date = new Date();
+    var time = date.getTime();
+    this._apiService.GET_METHOD("generate/scheduleJob/?name=" + time).subscribe((response) => {
+        //console.log(response);
+        window.open("https://gis.lrgvdc911.org/knapp_report/" + time + "/KnappReport.xlsx", "_blank");
+    })
+  }
+
   displayMap(object):void{
 
     if(this.selected){
