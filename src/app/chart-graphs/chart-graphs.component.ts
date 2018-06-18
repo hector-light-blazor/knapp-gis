@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {ApiService} from "../api.service";
-import { BaseChartDirective } from 'ng2-charts';
+//import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'knapp-chart-graphs',
@@ -15,6 +15,7 @@ export class ChartGraphsComponent implements OnInit {
    //Variables that control the canvas for bar options...
    public barChartColors:Array<any> =[];
    public barChartOptions:any = {
+    
     scaleShowVerticalLines: false,
     tooltips: {
       callbacks: {
