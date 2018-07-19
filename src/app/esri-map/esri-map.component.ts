@@ -45,7 +45,7 @@ export class EsriMapComponent implements OnInit {
   ngOnChanges() {
     
     if(this.options){
-      console.log(this.options);
+      // console.log(this.options);
        switch (this.options.option) {
          case "dataTable":
            this.programFeatureLayer.hide();
@@ -190,7 +190,7 @@ export class EsriMapComponent implements OnInit {
             center: [-97.990522, 26.158336],
             slider: false,
             showAttribution: false,
-            basemap: "osm"
+            basemap: "national-geographic"
           });
 
           // To Check if we are in iframe
@@ -336,7 +336,7 @@ export class EsriMapComponent implements OnInit {
     this.textLayer.clear();
     let arrGeom = [];
     this._apiService.GET_METHOD("programs/getSingleProgramLocation/?id=" + id).subscribe(response => {
-       // console.log(response);
+        // console.log(response);
         let length = response.length;
         for(var i = 0; i < length; i++){
             let color = response[i].color;
@@ -400,7 +400,7 @@ export class EsriMapComponent implements OnInit {
 
             var sfs = new this.fillSymbol(this.fillSymbol.STYLE_SOLID,
         new this.lineSymbol(this.lineSymbol.STYLE_SOLID,
-        this.color.fromArray([r, g, b, 0.5]), 4),this.color.fromArray([r, g, b, 0.5]));
+        this.color.fromArray([r, g, b, 0.2]), 4),this.color.fromArray([r, g, b, 0.2]));
 
         var coor = JSON.parse(response[i].geom);
         var poly = new this.polygon(coor.coordinates[0]);
