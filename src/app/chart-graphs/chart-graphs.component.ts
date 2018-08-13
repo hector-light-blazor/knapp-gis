@@ -72,7 +72,7 @@ export class ChartGraphsComponent implements OnInit {
   
   public barChartLabels:any = [];
   
-  public barChartType:string = 'line';
+  public barChartType:string = 'bar';
   public barChartLegend:boolean = false;
   public barChartData:any[] = [
     {data: [], label: "Year's Invested"}
